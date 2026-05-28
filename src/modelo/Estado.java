@@ -281,6 +281,7 @@ public class Estado implements Serializable {
 	    return true;
 	}
 
+	
 	@Override
 	public boolean equals(Object obj) {
 	    if (this == obj) return true;
