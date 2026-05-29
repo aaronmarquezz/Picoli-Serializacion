@@ -271,11 +271,9 @@ public class Estado implements Serializable {
 	     
 	     Estado other = (Estado) obj;
 	     
-	     // Comparar el ArrayDeque
 	     if (!compararArrayDeque(this.historicoIncrementosDemanda, other.historicoIncrementosDemanda))
 	         return false;
 	     
-	     // El resto de tus comparaciones normales
 	     return Double.doubleToLongBits(cantidadProducidaPorTrabajador) == Double.doubleToLongBits(other.cantidadProducidaPorTrabajador)
 	             && Double.doubleToLongBits(capital) == Double.doubleToLongBits(other.capital)
 	             && defuncionesPeridoAnterior == other.defuncionesPeridoAnterior
