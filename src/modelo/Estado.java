@@ -253,58 +253,40 @@ public class Estado implements Serializable {
 	            edadJubilacion, edadMadurez, historicoIncrementosDemanda, menores, parados, totalDemandado,
 	            trabajadores);
 	}
-	private boolean compararArrayDeque(ArrayDeque<Double> a, ArrayDeque<Double> b) {
-	    // Si son el mismo objeto (misma referencia), son iguales
-	    if (a == b) return true;
-	    
-	    // Si uno es null y el otro no, son diferentes
-	    if (a == null || b == null) return false;
-	    
-	    // Si tienen diferente tamaño, son diferentes
-	    if (a.size() != b.size()) return false;
-	    
-	    // Comparar elemento por elemento
-	    Iterator<Double> itA = a.iterator();
-	    Iterator<Double> itB = b.iterator();
-	    
-	    while (itA.hasNext() && itB.hasNext()) {
-	        Double elementoA = itA.next();
-	        Double elementoB = itB.next();
-	        
-	        // Si algún elemento es diferente, todo es diferente
-	        if (!elementoA.equals(elementoB)) {
-	            return false;
-	        }
-	    }
-	    
-	    // Si llegamos aquí, todos los elementos son iguales
-	    return true;
-	}
+	 private boolean compararArrayDeque(ArrayDeque<Double> a, ArrayDeque<Double> b) {
+
+		  return new ArrayList<Double>(a).equals(new ArrayList<Double>(b));
+		}
+	 
+	 private boolean compararPriorityQueue(AbstractCollection<Adulto> col1, AbstractCollection<Adulto> col2) {
+		    return new ArrayList<>(col1).equals(new ArrayList<>(col2));
+		}
 
 	
-	@Override
-	public boolean equals(Object obj) {
-	    if (this == obj) return true;
-	    if (obj == null) return false;
-	    if (getClass() != obj.getClass()) return false;
-	    
-	    Estado other = (Estado) obj;
-	    
-	    // Comparar el ArrayDeque manualmente
-	    if (!compararArrayDeque(this.historicoIncrementosDemanda, other.historicoIncrementosDemanda))
-	        return false;
-	    
-	    // El resto de tus comparaciones normales
-	    return Double.doubleToLongBits(cantidadProducidaPorTrabajador) == Double.doubleToLongBits(other.cantidadProducidaPorTrabajador)
-	            && Double.doubleToLongBits(capital) == Double.doubleToLongBits(other.capital)
-	            && defuncionesPeridoAnterior == other.defuncionesPeridoAnterior
-	            && Double.doubleToLongBits(edadJubilacion) == Double.doubleToLongBits(other.edadJubilacion)
-	            && Double.doubleToLongBits(edadMadurez) == Double.doubleToLongBits(other.edadMadurez)
-	            && Objects.equals(menores, other.menores)
-	            && Objects.equals(ancianos, other.ancianos) 
-	            && Objects.equals(parados, other.parados)
-	            && Double.doubleToLongBits(totalDemandado) == Double.doubleToLongBits(other.totalDemandado)
-	            && Objects.equals(trabajadores, other.trabajadores);
-	}
+	 @Override
+	 public boolean equals(Object obj) {
+	     if (this == obj) return true;
+	     if (obj == null) return false;
+	     if (getClass() != obj.getClass()) return false;
+	     
+	     Estado other = (Estado) obj;
+	     
+	     // Comparar el ArrayDeque
+	     if (!compararArrayDeque(this.historicoIncrementosDemanda, other.historicoIncrementosDemanda))
+	         return false;
+	     
+	     // El resto de tus comparaciones normales
+	     return Double.doubleToLongBits(cantidadProducidaPorTrabajador) == Double.doubleToLongBits(other.cantidadProducidaPorTrabajador)
+	             && Double.doubleToLongBits(capital) == Double.doubleToLongBits(other.capital)
+	             && defuncionesPeridoAnterior == other.defuncionesPeridoAnterior
+	             && Double.doubleToLongBits(edadJubilacion) == Double.doubleToLongBits(other.edadJubilacion)
+	             && Double.doubleToLongBits(edadMadurez) == Double.doubleToLongBits(other.edadMadurez)
+	             && Objects.equals(menores, other.menores)
+	             && Objects.equals(ancianos, other.ancianos) 
+	             && compararPriorityQueue(this.getParados(), other.getParados())
+	             && Double.doubleToLongBits(totalDemandado) == Double.doubleToLongBits(other.totalDemandado)
+	             && compararPriorityQueue(this.getTrabajadores(), other.getTrabajadores());
+	 }
+
 	
 }

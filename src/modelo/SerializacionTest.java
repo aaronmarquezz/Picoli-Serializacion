@@ -34,10 +34,10 @@ class SerializacionTest {
 			e.printStackTrace();
 		}
 		
-//		assertEquals(estado1, estado2);
+		assertEquals(estado1, estado2);
 		assertTrue(estado1.equals(estado2));
 		
-		//ahora vamos avanzando los dos y tendrían que ser iguales. 
+		//ahora vamos avanzando los dos y tendrían que ser iguales. Podríamos hacerlo parametrizado. 
 		try {
 			estado1.abrirPeriodo(0.4);
 		} catch (Exception e) {
